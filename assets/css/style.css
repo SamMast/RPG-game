@@ -1,0 +1,14 @@
+ .character {
+    width: 150px;
+    height: 150px;
+    border-style: solid;
+    padding: 2px;
+    float: left;
+    margin: 2px;
+    text-align: center;
+  }
+
+  .image {
+  	width: 100px;
+  	height: 100px;
+  }
