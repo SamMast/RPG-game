@@ -34,10 +34,25 @@ $(document).ready(function() {
 		src:"https://vignette.wikia.nocookie.net/starwars/images/6/6a/Jabba_the_Hutt_NEGTC2.jpg/revision/latest/scale-to-width-down/200?cb=20110127014208"
 	}
 
+
+
+
+
 	var characters = [obi, luke, darth, jabba];
 	var userCharacter = [];
+	var userCharacterName = "";
+	var enemyCharacterName = "";
+	var userCharacterAttack = "";
+	var enemyCharacterAttack = "";
+	var userCharacterHp = "";
+	var enemyCharacterHp = "";	
+	var userCharacterAttack = "";
+	var enemyCharacterCounter = "";	
+
 	var enemiesLeft = [];
 	var currentEnemy = [];
+
+
 	var userCharacterPicked = false;
 	var enemyCharacterPicked = false;
 
@@ -76,17 +91,19 @@ function createButton() {
 
 	$(".character").on("click", function() {
 
+
 	   	if (userCharacterPicked === false) {
 
-			$("#pickCharacter").hide();
 		    $("#pickText").hide();
 
 		    userCharacter = $(this).append(characters);
 		    console.log(userCharacter);
 		    $("#userCharacter").append(userCharacter);
 
-		    var userCharacterName = $(this).attr("character-name");
-		    
+		    userCharacterName = $(this).attr("character-name");
+		    userCharacterHp = $(this).attr("character-hp");
+		    userCharacterAttack = $(this).attr("character-attack");
+
 		    userCharacterPicked = true;
 
 		    $(".character").each(function () {
@@ -96,18 +113,20 @@ function createButton() {
 
 		    });
 
-	   	} else if (userCharacterPicked === true && enemyCharacterPicked === false) {
+	   	} else if (enemyCharacterPicked === false) {
 
 		   	currentEnemy = $(this).append(characters);
 		    console.log(currentEnemy);
 		    $("#currentEnemy").append(currentEnemy);
 
-		    var enemyCharacterName = $(this).attr("character-name");
+		    enemyCharacterName = $(this).attr("character-name");
+		    enemyCharacterHp = $(this).attr("character-hp");
+		    enemyCharacterCounter = $(this).attr("character-counter");
 
 		    enemyCharacterPicked = true;
 
 		    $(".character").each(function () {
-		       	if ($(this).attr("character-name") != userCharacterName) {
+		       	if ($(this).attr("character-name") != userCharacterName && $(this).attr("character-name") != enemyCharacterName) {
 		        	$("#enemiesLeft").append(this);
 		        }
 
@@ -115,6 +134,43 @@ function createButton() {
 		}
 
 	});
+
+	$("#attackButton").on("click", function() {
+
+		if (enemyCharacterPicked === true && userCharacterPicked === true) {
+			
+			function attack() {
+				userCharacterHp -= enemyCharacterCounter;
+				enemyCharacterHp -= userCharacterAttack;
+				userCharacterAttack *= 2;
+
+
+			}
+
+			attack();
+
+			alert(userCharacterName + " attacked " + enemyCharacterName + " for " + userCharacterAttack + " damage.");
+			alert(userCharacterName + " took " + enemyCharacterCounter + " damage from " + enemyCharacterName);
+
+			if (userCharacterHp <= 0) {
+				alert("You lost");
+			}
+	
+		} else {
+			alert("Please pick your character and enemy first")
+		}
+
+
+    });
+
+		    console.log(userCharacterName);
+		    console.log(userCharacterHp);
+		    console.log(userCharacterAttack);
+
+
+});
+
+//Attack button click 
 
 
 
