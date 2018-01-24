@@ -9,7 +9,8 @@ $(document).ready(function() {
 		attack: "20",
 		healthPoints:"175",
 		counterAttack:"20",
-		src:"https://www.hasbro.com/common/productimages/en_AU/80520fda50569047f523b6138dd58048/8057953D50569047F527CFD4A4CAF309.jpg"
+		src:"https://www.hasbro.com/common/productimages/en_AU/80520fda50569047f523b6138dd58048/8057953D50569047F527CFD4A4CAF309.jpg",
+		dead: false
 	}
 		
 	var luke = {
@@ -18,7 +19,8 @@ $(document).ready(function() {
 		attack: "40",
 		healthPoints:"125",
 		counterAttack:"10",
-		src:"http://moziru.com/images/luke-skywalker-clipart-3.jpg"
+		src:"http://moziru.com/images/luke-skywalker-clipart-3.jpg",
+		dead: false
 	}	
 		
 	var darth = {
@@ -27,7 +29,8 @@ $(document).ready(function() {
 		attack: "30",
 		healthPoints:"150",
 		counterAttack:"30",
-		src:"https://cdn.shopify.com/s/files/1/0732/4767/products/Darth_Vader_New_Hope_Star_Wars_SHFiguarts_Bandai_Tamashii_Nations_Woozy_Moo.jpg?v=1512413304"
+		src:"https://cdn.shopify.com/s/files/1/0732/4767/products/Darth_Vader_New_Hope_Star_Wars_SHFiguarts_Bandai_Tamashii_Nations_Woozy_Moo.jpg?v=1512413304",
+		dead: false
 	}	
 
 	var jabba = {
@@ -36,12 +39,9 @@ $(document).ready(function() {
 		attack: "10",
 		healthPoints:"200",
 		counterAttack:"40",
-		src:"https://vignette.wikia.nocookie.net/starwars/images/6/6a/Jabba_the_Hutt_NEGTC2.jpg/revision/latest/scale-to-width-down/200?cb=20110127014208"
+		src:"https://vignette.wikia.nocookie.net/starwars/images/6/6a/Jabba_the_Hutt_NEGTC2.jpg/revision/latest/scale-to-width-down/200?cb=20110127014208",
+		dead: false
 	}
-
-
-
-
 
 	var characters = [obi, luke, darth, jabba];
 	var userCharacter = [];
@@ -117,8 +117,6 @@ function reset() {
 
 }
 
-//Start Here
-
 	//initial button create
 	createButton();
 
@@ -127,12 +125,10 @@ function reset() {
 // On Click events
 
 	
-	$(".character").on("click", function() {
+	$("body").on("click", ".character", function() {
 
 		//if you havent picked a character yet
 	   	if (userCharacterPicked === false) {
-
-	   		alert("working...");
 
 		    $("#pickText").hide();
 
@@ -174,10 +170,16 @@ function reset() {
 		        	$("#enemiesLeft").append(this);
 		     
 
-		        	//trying to change the color of the enemies left to red in next 3 lines, but not working
-		        	// if ($("#" + userCharacterVar) <= 0) {
-		        	// 	$(".character").css("background-color", "red");
-		        	// }
+		        	
+
+		     		//if userdeath variable is true, add class dead and append to enemies left(add this to line 169)
+		     			//else if user death is false, follow logic above and just append (no add class)
+
+		     			//$().addClass("dead")
+
+		     	//Then need to add if all enemies have dead class, reset game
+
+			
 		        }
 
 		    });
@@ -219,17 +221,9 @@ function reset() {
 
 			//if enemy dies
 			if (enemyCharacterHp <=0) {
-				alert("enemy dies");
+				alert(enemyCharacterName + " died!  Pick your next enemy");
 
-				//want to make the enemy who died button hidden (or maybe unclickable and change css to have X through it). 
-				//maybe add a class to the button div that can be styled to hide?
-					//then if all are hidden, say win game and reset
-
-				//$().addClass("dead")
-
-
-
-				//allows me to pick a new enemy and moves the old enemy back up
+				//allows me to pick a new enemy and moves the old enemy back up, but want to change the css style first
 				enemyCharacterPicked = false;
 
 
@@ -240,13 +234,8 @@ function reset() {
 				alert("You lost");
 
 				//game reset
-
-
-				//this almost works, but I am unable to click a new character on the second round for some reason...?
-
 				reset();
 				createButton();
-
 
 			}
 	
