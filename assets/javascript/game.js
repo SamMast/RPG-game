@@ -1,4 +1,9 @@
 $(document).ready(function() {
+var themeSong = document.createElement("audio");
+themeSong.setAttribute("src", "http://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3");
+$(themeSong).prop('volume', 0.19);
+themeSong.play();
+
 
 //Global Variables
 
@@ -92,6 +97,9 @@ function createButton() {
 
 	
 function reset() {
+	var audioElement = document.createElement("audio");
+    audioElement.setAttribute("src", "http://www.thesoundarchive.com/starwars/R2D2-yeah.mp3");
+    audioElement.play();
 	
 	characters = [obi, luke, darth, jabba];
 	userCharacter = [];
@@ -203,7 +211,9 @@ function reset() {
 			function attack() {
 				userCharacterHp -= enemyCharacterCounter;
 				enemyCharacterHp -= userCharacterAttack;
-	
+				var audioElement = document.createElement("audio");
+      			audioElement.setAttribute("src", "http://www.galaxyfaraway.com/Sounds/saberdown.wav");
+      			audioElement.play();
 			}
 
 			attack();
