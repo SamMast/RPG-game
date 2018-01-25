@@ -227,11 +227,15 @@ function reset() {
 
 			//if character dies
 			if (userCharacterHp <= 0) {
-				alert("You lost");
+				$("#textScreen3").text("You were killed by " + enemyCharacterName + ". Game will reset in 5 sec . . . ");
+				$("#attack").hide();
 
-				//game reset
-				reset();
-				createButton();
+				// delayed 5 sec reset?
+				setTimeout(function(){
+      			  reset();
+      			  createButton();
+
+      			}, 5000);
 
 			}
 
@@ -252,6 +256,7 @@ function reset() {
 
 			//if enemy characters all dead
 			if (winCount === 3) {
+				$("#attack").hide();
 
 				$("#textScreen3").text("You Win!!!  Game will reset in 5 sec...");
 				
