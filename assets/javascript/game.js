@@ -2,6 +2,7 @@ $(document).ready(function() {
 var themeSong = document.createElement("audio");
 themeSong.setAttribute("src", "http://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3");
 $(themeSong).prop('volume', 0.19);
+themeSong.loop = true;
 themeSong.play();
 
 
@@ -11,8 +12,8 @@ themeSong.play();
 	var obi = {
 		var: "obi",
 		name:"Obi-Wan Kenobi", 
-		attack: "20",
-		healthPoints:"175",
+		attack: "35",
+		healthPoints:"160",
 		counterAttack:"20",
 		src:"https://www.hasbro.com/common/productimages/en_AU/80520fda50569047f523b6138dd58048/8057953D50569047F527CFD4A4CAF309.jpg",
 		dead: false
@@ -21,9 +22,9 @@ themeSong.play();
 	var luke = {
 		var: "luke",
 		name:"Luke Skywalker", 
-		attack: "40",
-		healthPoints:"125",
-		counterAttack:"10",
+		attack: "45",
+		healthPoints:"175",
+		counterAttack:"15",
 		src:"http://moziru.com/images/luke-skywalker-clipart-3.jpg",
 		dead: false
 	}	
@@ -31,9 +32,9 @@ themeSong.play();
 	var darth = {
 		var: "darth",
 		name:"Darth Vader", 
-		attack: "30",
-		healthPoints:"150",
-		counterAttack:"30",
+		attack: "40",
+		healthPoints:"160",
+		counterAttack:"25",
 		src:"https://cdn.shopify.com/s/files/1/0732/4767/products/Darth_Vader_New_Hope_Star_Wars_SHFiguarts_Bandai_Tamashii_Nations_Woozy_Moo.jpg?v=1512413304",
 		dead: false
 	}	
@@ -41,9 +42,9 @@ themeSong.play();
 	var jabba = {
 		var: "jabba",
 		name:"Jabba the Hut", 
-		attack: "10",
-		healthPoints:"200",
-		counterAttack:"40",
+		attack: "15",
+		healthPoints:"190",
+		counterAttack:"30",
 		src:"https://vignette.wikia.nocookie.net/starwars/images/6/6a/Jabba_the_Hutt_NEGTC2.jpg/revision/latest/scale-to-width-down/200?cb=20110127014208",
 		dead: false
 	}
@@ -226,7 +227,8 @@ function reset() {
 
 			console.log(userCharacterName + ": " + userCharacterHp + " ; " + enemyCharacterName + ": " + enemyCharacterHp);
 
-			userCharacterAttack *= 2;
+			var random = [(Math.random()) +1]
+			userCharacterAttack = Math.round(userCharacterAttack * random);
 
 
 			//to change the hp values on the page to update to match above values
@@ -240,6 +242,9 @@ function reset() {
 				$("#textScreen3").text("You were killed by " + enemyCharacterName + ". Game will reset in 5 sec . . . ");
 				$("#attack").hide();
 
+				var lossAudio = document.createElement("audio");
+			    lossAudio.setAttribute("src", "http://www.galaxyfaraway.com/Sounds/Imhit.wav");
+			    lossAudio.play();
 				// delayed 5 sec reset?
 				setTimeout(function(){
       			  reset();
@@ -266,8 +271,15 @@ function reset() {
 
 			//if enemy characters all dead
 			if (winCount === 3) {
+				$("." + enemyCharacterVar).hide();			
+
 				$("#attack").hide();
 
+				var winAudio = document.createElement("audio");
+			    winAudio.setAttribute("src", "assets/images/Bar_cheer.mp3");
+			    winAudio.play();
+
+				
 				$("#textScreen3").text("You Win!!!  Game will reset in 5 sec...");
 				
 				// delayed 5 sec reset?
