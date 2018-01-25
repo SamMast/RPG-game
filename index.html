@@ -1,4 +1,4 @@
-
+	
 <!DOCTYPE html>
 <html lang="en-us">
 	<head>
@@ -22,30 +22,43 @@
 				<div id="pickText" class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					Pick a Character:
 					<br>
-					<span id="pickCharacter"></span>
+					<div id="pickCharacter"></div>
 				</div>
-				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 midText">
 					Your Character:
 					<br>
-					<span id="userCharacter"></span>
+					<div id="userCharacter"></div>
 				</div>
-				<div id="enemiesText" class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-					Enemies Left:
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+					<br >
+					<div id="textScreen1"></div>
+					<div id="textScreen2"></div>
+					<div id="textScreen3"></div>
+				</div>
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 midText">
+					Current Enemy:
 					<br>
-					<span id="enemiesLeft"></span>
+					<div id="currentEnemy"></div>
 				</div>
 			</div>
-
-			<div>
-				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+			<hr>
+			<div class="playscreen">
+				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 glyphicon glyphicon-triangle-top midText" id="fightArrow">
+				</div>
+				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 midText">
+					
 					Fight Section
 				</div>
 				<br>
-				<button id="attackButton">Attack!</button>
-				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-					Current Enemy:
+				<div id="attack" class="col-md-12 col-lg-12 col-xs-12 col-sm-12" >
+					<button id="attackButton" class="text-center">Attack!</button>
+				</div>
+			</div>
+			<div class="playscreen">
+				<div id="enemiesText" class="col-md-12 col-lg-12 col-sm-12 col-xs-12 midText">
+					Enemies Left:
 					<br>
-					<span id="currentEnemy"></span>
+					<div id="enemiesLeft"></div>
 				</div>
 			</div>
 

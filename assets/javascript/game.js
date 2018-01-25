@@ -63,6 +63,8 @@ $(document).ready(function() {
 	var userCharacterPicked = false;
 	var enemyCharacterPicked = false;
 
+	var winCount = 0;
+
 //Functions
 
 function createButton() {
@@ -75,6 +77,7 @@ function createButton() {
         characterBtn.attr("character-counter", characters[i].counterAttack);
         characterBtn.attr("character-var", characters[i].var);
         characterBtn.addClass("character");
+        characterBtn.addClass(characters[i].var);
 
 
 
@@ -106,6 +109,8 @@ function reset() {
 	enemiesLeft = [];
 	currentEnemy = [];
 
+	winCount = 0;
+
 
 	userCharacterPicked = false;
 	enemyCharacterPicked = false;
@@ -115,11 +120,22 @@ function reset() {
 	$("#enemiesLeft").html("");
 	$("#currentEnemy").html("");
 
+	$(".midText").hide();
+	$("#attack").hide();
+
+	$("#textScreen1").text("");
+	$("#textScreen2").text("");
+	$("#textScreen3").text("");
+	$("#textScreen3").attr("font-size", "100%");
+
 }
+
+
 
 	//initial button create
 	createButton();
-
+	$(".midText").hide();
+	$("#attack").hide();
 
 
 // On Click events
@@ -131,6 +147,7 @@ function reset() {
 	   	if (userCharacterPicked === false) {
 
 		    $("#pickText").hide();
+		    $(".midText").show();
 
 		    userCharacter = $(this).append(characters);
 		    $("#userCharacter").append(userCharacter);
@@ -164,22 +181,11 @@ function reset() {
 
 
 		    enemyCharacterPicked = true;
+			$("#attack").show();
 
 		    $(".character").each(function () {
 		       	if ($(this).attr("character-name") != userCharacterName && $(this).attr("character-name") != enemyCharacterName) {
-		        	$("#enemiesLeft").append(this);
-		     
-
-		        	
-
-		     		//if userdeath variable is true, add class dead and append to enemies left(add this to line 169)
-		     			//else if user death is false, follow logic above and just append (no add class)
-
-		     			//$().addClass("dead")
-
-		     	//Then need to add if all enemies have dead class, reset game
-
-			
+		        	$("#enemiesLeft").append(this);		
 		        }
 
 		    });
@@ -204,12 +210,13 @@ function reset() {
 
 
 			//alerts to check values are adding correctly
-			alert(userCharacterName + " attacked " + enemyCharacterName + " for " + userCharacterAttack + " damage.");
-			alert(userCharacterName + " took " + enemyCharacterCounter + " damage from " + enemyCharacterName);
-			alert(userCharacterName + ": " + userCharacterHp + " ; " + enemyCharacterName + ": " + enemyCharacterHp);
+			$("#textScreen1").text("You attacked " + enemyCharacterName + " for " + userCharacterAttack + " damage.");
+			$("#textScreen2").text(enemyCharacterName + " attacked you back for " + enemyCharacterCounter + " damage.");
+			$("#textScreen3").text("");
+
+			console.log(userCharacterName + ": " + userCharacterHp + " ; " + enemyCharacterName + ": " + enemyCharacterHp);
 
 			userCharacterAttack *= 2;
-
 
 
 			//to change the hp values on the page to update to match above values
@@ -217,17 +224,6 @@ function reset() {
 
 			$("#" + enemyCharacterVar).text(enemyCharacterHp);
 
-
-
-			//if enemy dies
-			if (enemyCharacterHp <=0) {
-				alert(enemyCharacterName + " died!  Pick your next enemy");
-
-				//allows me to pick a new enemy and moves the old enemy back up, but want to change the css style first
-				enemyCharacterPicked = false;
-
-
-			}
 
 			//if character dies
 			if (userCharacterHp <= 0) {
@@ -238,10 +234,39 @@ function reset() {
 				createButton();
 
 			}
+
+			//if enemy dies
+			if (enemyCharacterHp <=0 && userCharacterHp > 0) {
+				$("#textScreen3").text(enemyCharacterName + " died!  Pick your next enemy");
+				winCount++;
+				$("." + enemyCharacterVar).hide();			
+
+
+				
+
+				//allows me to pick a new enemy and moves the old enemy back up, but want to change the css style first
+				enemyCharacterPicked = false;
+
+
+			}
+
+			//if enemy characters all dead
+			if (winCount === 3) {
+
+				$("#textScreen3").text("You Win!!!  Game will reset in 5 sec...");
+				
+				// delayed 5 sec reset?
+				setTimeout(function(){
+      			  reset();
+      			  createButton();
+
+      			}, 5000);
+
+			}
 	
 
-		} else {
-			alert("Please pick your character and enemy first")
+		} else if (userCharacterPicked === true && enemyCharacterPicked ===false) {
+			alert("Please pick an Enemy");
 		}
 
 

@@ -23,6 +23,14 @@
   background-color: black;
   width: 100px;
   height: 50px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#attack {
+  display: inline-block;
+  margin: auto;
 }
 
 body {
@@ -37,4 +45,42 @@ body {
 
 .title {
   font-size: 600%;
+}
+
+.playscreen {
+  font-size: 119%;
+}
+
+#pickCharacter,
+#enemiesLeft {
+  margin-bottom: 20px;
+}
+
+#pickCharacter, 
+#userCharacter, 
+#currentEnemy, 
+#enemiesLeft {
+  display: inline-block;
+  margin: auto;
+}
+
+#currentEmeny {
+  clear: both;
+}
+
+#fightArrow {
+  font-size: 600%;
+}
+
+#textScreen1,
+#textScreen2 {
+  margin-bottom: 20px;
+}
+
+#textScreen3 {
+  color: red;
+}
+
+#enemiesText {
+  margin-bottom: 50px;
 }
