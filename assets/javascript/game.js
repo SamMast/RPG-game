@@ -23,7 +23,7 @@ themeSong.play();
 		var: "luke",
 		name:"Luke Skywalker", 
 		attack: "45",
-		healthPoints:"175",
+		healthPoints:"170",
 		counterAttack:"15",
 		src:"http://moziru.com/images/luke-skywalker-clipart-3.jpg",
 		dead: false
@@ -32,7 +32,7 @@ themeSong.play();
 	var darth = {
 		var: "darth",
 		name:"Darth Vader", 
-		attack: "40",
+		attack: "35",
 		healthPoints:"160",
 		counterAttack:"25",
 		src:"https://cdn.shopify.com/s/files/1/0732/4767/products/Darth_Vader_New_Hope_Star_Wars_SHFiguarts_Bandai_Tamashii_Nations_Woozy_Moo.jpg?v=1512413304",
@@ -43,7 +43,7 @@ themeSong.play();
 		var: "jabba",
 		name:"Jabba the Hut", 
 		attack: "15",
-		healthPoints:"190",
+		healthPoints:"185",
 		counterAttack:"30",
 		src:"https://vignette.wikia.nocookie.net/starwars/images/6/6a/Jabba_the_Hutt_NEGTC2.jpg/revision/latest/scale-to-width-down/200?cb=20110127014208",
 		dead: false
@@ -275,10 +275,24 @@ function reset() {
 
 				$("#attack").hide();
 
-				var winAudio = document.createElement("audio");
-			    winAudio.setAttribute("src", "assets/images/Bar_cheer.mp3");
-			    winAudio.play();
+				if (userCharacterVar == "jabba") {
+					var winAudio = document.createElement("audio");
+				    winAudio.setAttribute("src", "http://www.thesoundarchive.com/starwars/return/jabba-the-hutt-laughing.mp3");
+				    winAudio.play();
 
+				} else if (userCharacterVar == "darth") {
+					var winAudio = document.createElement("audio");
+				    winAudio.setAttribute("src", "http://www.wavsource.com/snds_2018-01-14_3453803176249356/movies/star_wars/your_father.wav");
+				    winAudio.play();
+				} else if (userCharacterVar == "luke") {
+					var winAudio = document.createElement("audio");
+				    winAudio.setAttribute("src", "http://www.moviewavs.com/0053148414/WAVS/Movies/Star_Wars/i_feel.wav");
+				    winAudio.play();
+				} else {
+					var winAudio = document.createElement("audio");
+				    winAudio.setAttribute("src", "http://www.moviewavs.com/0053148414/MP3S/Movies/Star_Wars/force1.mp3");
+				    winAudio.play();					
+				}
 				
 				$("#textScreen3").text("You Win!!!  Game will reset in 5 sec...");
 				
